@@ -19,7 +19,7 @@
         "php-excel-reader/spreadsheet-reader": "dev-master",
         "symfony/yaml": ">=2.2",
         "beleneglorion/spreadsheet-reader" : "dev-master",
-        "mk-j/php_xlsxwriter": "dev-master"
+        "mk-j/php_xlsxwriter": "0.22"
 
     },
      "require-dev": {
