@@ -3,6 +3,7 @@
 namespace XtoY\Writer;
 
 use XtoY\Reporter\ReporterInterface;
+use DOMXPath;
 /**
  * A simple of XliffWriter inspired from symfony XliffFileDumper
  *
@@ -49,6 +50,17 @@ class XliffWriter  extends FileWriter
 
     public function write($line)
     {
+        
+        $id = md5($line['source']);
+        
+        $xpath = new DOMXPath($this->document);
+        $body = ($this->document->getElementsByTagName('body')->item(0));
+        
+        $query = 'trans-unit/@id[. = "'.$id.'"]';
+        
+        if ($xpath->query($query, $body)->length != 0)
+            return;
+        
         $translation = $this->document->createElement('trans-unit');
         $translation->setAttribute('id', md5($line['source']));
         $translation->setAttribute('resname', $line['source']);
@@ -90,3 +102,4 @@ class XliffWriter  extends FileWriter
    }
 
 }
+
